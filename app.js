@@ -1,3 +1,5 @@
+require.paths.push('./node_modules');
+
 var app = require('express').createServer();
 
 app.configure(function(){
