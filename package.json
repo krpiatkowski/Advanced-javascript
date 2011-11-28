@@ -2,14 +2,6 @@
   "author": "kp",
   "name": "Advanced-javascript",
   "version": "0.0.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/krpiatkowski/Advanced-javascript.git"
-  },
-  "main": "app.js",
-  "engines": {
-    "node": "~v0.4.11"
-  },
   "dependencies": {
      "express": ">= 2.5.1", 
      "jasmine-node" >= "1.0.13"

@@ -1,26 +1,25 @@
-require.paths.push('./node_modules');
+var express = require('express');
+var server = express.createServer()
 
-var app = require('express').createServer();
-
-app.configure(function(){
-    app.use(express.methodOverride());
-    app.use(express.bodyParser());
-    app.use(app.router);
+server.configure(function(){
+    server.use(express.methodOverride());
+    server.use(express.bodyParser());
+    server.use(server.router);
 });
 
-app.configure('development', function(){
-    server.set('views', __dirname + '/web-root/views');
+server.configure('development', function(){
+    server.set('views', __dirname + '/web-root/pages');
     server.set('view engine', 'jade');
     server.set('view options', {layout: false});
     server.use(express.bodyParser());
     server.use(express.methodOverride());
-    server.use(require('stylus').middleware({ src: __dirname + '/web-root' }));
+    server.use(require('stylus').middleware({ src: __dirname + '/web-root/styles' }));
     server.use(server.router);
-    server.use(express.static(__dirname + '/web-root'));        
+    server.use(express.static(__dirname + '/web-root'));
 });
 
-app.get('/', function(req, res){
-  res.send('index');
+server.get('/', function(req, res){
+  res.render('index.jade');
 });
 
-app.listen(process.env.PORT);
+server.listen(process.env.PORT);
