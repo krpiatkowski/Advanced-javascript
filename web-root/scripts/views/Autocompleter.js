@@ -1,29 +1,43 @@
 function Autocompleter(){
+    var _this = this;
+    
     this.container = $("<input>");
     this.container.autocomplete({
         source:[],
-        select: function( event, ui ) {
-            this.dispatchEvent({type: Autocompleter.Event.SELECT, ui.item.value});
+        select: function(event, ui) {
+            _this.dispatchEvent({
+                sender: this,
+                type: Autocompleter.Event.SELECT, 
+                msg:ui.item.object
+            });
 			return false;
-		}
-    })
-    .data
+		},
+        focus: function(event, ui){
+            _this.dispatchEvent({
+                sender: this,
+                type: Autocompleter.Event.FOCUS,
+                msg:ui.item.object
+            });
+        }
+    });
 }
 Autocompleter.prototype = new View();
 Autocompleter.constructor = Autocompleter;
 
-Autocompleter.prototype.setData = function(data){
+Autocompleter.prototype.notify = function(data){
     var transformedData = $.map(data, function(item) {
         return {
             label: item.name,
-            value: item
+            value: item.name,
+            object: item
         };
     });
     
-    this.container.autocomplete("source", transformedData);
+    this.container.autocomplete("option", "source", transformedData);
 };
 
 
 Autocompleter.Event = {
-    SELECT : 0
-}
+    SELECT : "Autocompleter.Event.SELECT",
+    FOCUS : "Autocompleter.Event.FOCUS"
+};

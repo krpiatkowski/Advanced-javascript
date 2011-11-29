@@ -17,7 +17,7 @@ View.prototype.addSubview = function(subview){
 
 View.prototype.dispatchEvent = function(event){
     if(this.controller !== undefined){
-        this.controller.sendEvent(event);
+        this.controller.receiveEvent(event);
     } else if(this.parent !== undefined) {
         this.parent.dispatchEvent(event);
     }
