@@ -1,6 +1,15 @@
+/**
+ * A view in the model-view-controller
+ * 
+ * @constructor
+ */
 function View(id){
     this.container = $(id);
 }
+
+/**
+ * @param {View} subview Insert a view as a subview.
+ */
 
 View.prototype.addSubview = function(subview){
     if(this.subviews === undefined){
