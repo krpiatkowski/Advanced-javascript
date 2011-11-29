@@ -1,3 +1,11 @@
+/**
+ * Models a set of kittens
+ * 
+ * The kittens are returned are static,
+ * and not saved between browser refreses
+ * 
+ * @constructor
+ */ 
 function StaticKittensModel(){
     this.kittens = [
         {name: 'Abbymini', age: 1},
@@ -13,6 +21,12 @@ function StaticKittensModel(){
 StaticKittensModel.prototype = new AbstractModel();
 StaticKittensModel.constructor = StaticKittensModel;
 
+/**
+ * Removes a kitten from the model,
+ * The kitten is identified by name.
+ * 
+ * @param {Object} kitten Kitten to be removed.
+ */
 StaticKittensModel.prototype.removeKitten = function(kitten){
     console.log(kitten);
     for(var i = 0; i < this.kittens.length; i++) { 

@@ -10,4 +10,4 @@ Commandline args:
 === JSDoc ===
 name: JSDoc
 File path:  node_modules/jsdoc/app/run.js
-Commandline args: -a -t=node_modules/jsdoc/templates/jsdoc web-root/scripts -d=web-root/docs
+Commandline args: -a -t=node_modules/jsdoc/templates/jsdoc web-root/scripts -d=web-root/docs -r=4
