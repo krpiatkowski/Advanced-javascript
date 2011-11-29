@@ -20,6 +20,7 @@ server.configure('development', function() {
     }));
     server.use(server.router);
     server.use(express.static(__dirname + '/web-root'));
+    server.use(express.static(__dirname + '/node_modules/requirejs'));
 });
 
 server.get('/', function(req, res) {
