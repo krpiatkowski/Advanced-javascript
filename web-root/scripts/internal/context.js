@@ -10,7 +10,6 @@ viewRoot.addSubview(autocompleter);
 //Models
 var kittensModel = new StaticKittensModel();
 
-
 //Wiring
 showcaseController.kittensModel = kittensModel;
 autocompleter.controller = showcaseController;
