@@ -1,3 +1,7 @@
+/**
+ * Autocompleter view
+ * @constructor
+ */ 
 function Autocompleter(){
     var _this = this;
     

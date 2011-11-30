@@ -1,5 +1,6 @@
 var express = require('express');
 var server = express.createServer()
+var paths = require('./paths.js');
 
 server.configure(function() {
     server.use(express.methodOverride());
@@ -24,12 +25,13 @@ server.configure('development', function() {
 });
 
 server.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', {scripts: paths.scripts});
 });
 
 //Exercises stuff
 server.get('/optimization2', function(req, res) {
     res.render('optimization2.html');
 });
+
 
 server.listen(process.env.PORT);

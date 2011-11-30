@@ -30,3 +30,13 @@ AbstractModel.prototype.notifyViews = function(){
         }        
     }
 };
+
+/**
+ * Gets the data from the model.
+ * 
+ * This should be implemented in subclasses.
+ * @return {Object} data  
+ */ 
+AbstractModel.prototype.getData = function(){
+    return {};
+};

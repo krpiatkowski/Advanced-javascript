@@ -28,7 +28,6 @@ StaticKittensModel.constructor = StaticKittensModel;
  * @param {Object} kitten Kitten to be removed.
  */
 StaticKittensModel.prototype.removeKitten = function(kitten){
-    console.log(kitten);
     for(var i = 0; i < this.kittens.length; i++) { 
         if(this.kittens[i].name == kitten.name){
             this.kittens.splice(i,1);   
@@ -37,6 +36,11 @@ StaticKittensModel.prototype.removeKitten = function(kitten){
     this.notifyViews();
 }; 
 
+/**
+ * Gets the data from the model.
+ * 
+ * @return {Object} kittens.  
+ */ 
 StaticKittensModel.prototype.getData = function(){
     return this.kittens;
 };

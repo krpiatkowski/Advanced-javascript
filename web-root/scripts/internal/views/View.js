@@ -40,3 +40,7 @@ View.prototype.dispatchEvent = function(event){
         this.parent.dispatchEvent(event);
     }
 };
+
+View.prototype.notify = function(data) {
+    
+}
