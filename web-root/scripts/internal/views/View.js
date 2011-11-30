@@ -4,7 +4,9 @@
  * @constructor
  */
 function View(id){
-    this.container = $(id);
+    if(id !== null) {
+        this.container = $(id);        
+    }
 }
 
 /**

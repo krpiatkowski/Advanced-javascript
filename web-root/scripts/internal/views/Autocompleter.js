@@ -4,7 +4,6 @@
  */ 
 function Autocompleter(){
     var _this = this;
-    
     this.container = $("<input>");
     this.container.autocomplete({
         source:[],
@@ -25,7 +24,7 @@ function Autocompleter(){
         }
     });
 }
-Autocompleter.prototype = new View();
+Autocompleter.prototype = new View(null);
 Autocompleter.constructor = Autocompleter;
 
 Autocompleter.prototype.notify = function(data){
