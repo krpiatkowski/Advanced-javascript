@@ -8,35 +8,7 @@
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js'></script>
     </head>
     <body>
-
-    <div id="grid1" dojoType="dojox.grid.EnhancedGrid" query="{ Track: '*' }" rowsPerPage="30" 
-    plugins='{nestedSorting: true, dnd: true, indirectSelection: true, menus:{headerMenu:"headerMenu", rowMenu:"rowMenu", cellMenu:"cellMenu", selectedRegionMenu:"selectedRegionMenu"}}'
-    store="csvStore1" structure="layout" rowSelector="20px">
-    <div dojoType="dijit.Menu" id="headerMenu" style="display: none;">
-        <div dojoType="dijit.MenuItem">Header Menu Item 1</div>
-        <div dojoType="dijit.MenuItem">Header Menu Item 2</div>
-        <div dojoType="dijit.MenuItem">Header Menu Item 3</div>
-        <div dojoType="dijit.MenuItem">Header Menu Item 4</div>
-    </div>
-    <div dojoType="dijit.Menu" id="rowMenu" style="display: none;">
-        <div dojoType="dijit.MenuItem">Row Menu Item 1</div>
-        <div dojoType="dijit.MenuItem">Row Menu Item 2</div>
-        <div dojoType="dijit.MenuItem">Row Menu Item 3</div>
-        <div dojoType="dijit.MenuItem">Row Menu Item 4</div>
-    </div>
-    <div dojoType="dijit.Menu" id="cellMenu" style="display: none;">
-        <div dojoType="dijit.MenuItem">Cell Menu Item 1</div>
-        <div dojoType="dijit.MenuItem">Cell Menu Item 2</div>
-        <div dojoType="dijit.MenuItem">Cell Menu Item 3</div>
-        <div dojoType="dijit.MenuItem">Cell Menu Item 4</div>
-    </div>
-    <div dojoType="dijit.Menu" id="selectedRegionMenu" style="display: none;">
-        <div dojoType="dijit.MenuItem">Action 1 for Selected Region</div>
-        <div dojoType="dijit.MenuItem">Action 2 for Selected Region</div>
-        <div dojoType="dijit.MenuItem">Action 3 for Selected Region</div>
-        <div dojoType="dijit.MenuItem">Action 4 for Selected Region</div>
-    </div>
-</div>
-<script type='text/javascript' src='scripts/internal/dojo/dojo.js'></script>
+    <div id="grid1" dojoType="dojox.grid.EnhancedGrid" rowsPerPage="30" store="store" structure="layout" rowSelector="20px"></div>
+    <script type='text/javascript' src='scripts/internal/dojo/dojo.js'></script>
 </body>
 <html>
