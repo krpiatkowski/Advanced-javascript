@@ -21,15 +21,20 @@ server.configure('development', function() {
     }));
     server.use(server.router);
     server.use(express.static(__dirname + '/web-root'));
+    server.use(express.static(__dirname + '/web-root/pages'));
     server.use(express.static(__dirname + '/exercises'));
 });
 
-server.get('/mvc', function(req, res) {
+server.get('/mvc.html', function(req, res) {
     res.render('mvc', {scripts: paths.scripts});
 });
 
 server.get('/jquery', function(req, res){
    res.render('jquery');
+});
+
+server.get('/dojo', function(req, res){
+   res.render('dojo');
 });
 
 server.listen(process.env.PORT);
