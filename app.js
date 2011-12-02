@@ -21,17 +21,15 @@ server.configure('development', function() {
     }));
     server.use(server.router);
     server.use(express.static(__dirname + '/web-root'));
-    server.use(express.static(__dirname + '/node_modules/requirejs'));
+    server.use(express.static(__dirname + '/exercises'));
 });
 
-server.get('/', function(req, res) {
-    res.render('index', {scripts: paths.scripts});
+server.get('/mvc', function(req, res) {
+    res.render('mvc', {scripts: paths.scripts});
 });
 
-//Exercises stuff
-server.get('/optimization2', function(req, res) {
-    res.render('optimization2.html');
+server.get('/jquery', function(req, res){
+   res.render('jquery');
 });
-
 
 server.listen(process.env.PORT);

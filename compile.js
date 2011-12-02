@@ -65,7 +65,8 @@ function compile(code, next) {
           '&output_info=compiled_code' +
           '&output_info=warnings'+ 
           '&output_info=errors' + 
-          '&output_info=statistics',
+          '&output_info=statistics' +
+          '&warning_level=verbose',
         client = http.createClient(80, host).on('error', next),
         req = client.request('POST', '/compile', {
           'Host': host,
