@@ -13,21 +13,18 @@ dojo.ready(function() {
             type: dojox.grid.cells._Widget
         },
         rows: [{
-            field: 'Name',
+            field: 'name',
             width: '10'
         }, {
-            field: 'Color',
+            field: 'color',
             width: '15'
         }, {
-            field: 'Age',
+            field: 'age',
             width: '6'
-        }, {
-            field: 'Cuteness',
-            width: '28'
         }]
     }];
     store = new dojox.data.CsvStore({
-        id: 'csvStore1',
+        id: 'store',
         url: 'scripts/internal/dojo/kittens.cvs'
     });
     //parse!
