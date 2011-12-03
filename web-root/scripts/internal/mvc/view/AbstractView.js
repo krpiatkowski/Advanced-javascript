@@ -32,16 +32,17 @@ AbstractView.prototype.addSubview = function(subview){
  * @param {MVCEvent} event Event to dispatch.
  */ 
 AbstractView.prototype.dispatchEvent = function(event){
+    var accept = false;
     if(this.controller !== undefined){
-        this.controller.receiveEvent(event);
-    } else if(this.parent !== undefined) {
+        accept = this.controller.receiveEvent(event);
+    } 
+    
+    if(!accept && this.parent !== undefined) {
         this.parent.dispatchEvent(event);
     }
 };
 
 /**
  * Notifies a view, that i should refresh its data.
- * 
- * @param {Object} data The data the view should update with.
  */ 
-AbstractView.prototype.notify = function(data) {}
+AbstractView.prototype.notify = function() {}

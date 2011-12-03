@@ -1,7 +1,7 @@
 //requires
 dojo.require('dojox.grid.EnhancedGrid');
 dojo.require('dojox.grid.enhanced.plugins.NestedSorting');
-dojo.require('dojox.data.CsvStore');
+dojo.require('dojox.data.JsonRestStore');
 dojo.require('dojo.parser');
 
 dojo.ready(function() {
@@ -13,22 +13,22 @@ dojo.ready(function() {
             type: dojox.grid.cells._Widget
         },
         rows: [{
-            field: 'Name',
+            field: 'name',
             width: '10'
         }, {
-            field: 'Color',
+            field: 'color',
             width: '15'
         }, {
-            field: 'Age',
+            field: 'age',
             width: '6'
         }, {
             field: 'Cuteness',
             width: '28'
         }]
     }];
-    store = new dojox.data.CsvStore({
-        id: 'csvStore1',
-        url: 'scripts/internal/dojo/kittens.cvs'
+    store = new dojox.data.JsonRestStore({
+        id: 'store',
+        target: '/kittens'
     });
     //parse!
     dojo.parser.parse();

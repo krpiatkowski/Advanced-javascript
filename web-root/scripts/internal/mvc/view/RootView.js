@@ -4,8 +4,10 @@
  * @constructor
  * @extends {AbstractView}
  */
-function View(id){
+function RootView(id){
     if(id !== null) {
         this.container = $(id);        
     }
 }
+RootView.prototype = new AbstractView();
+RootView.constructor = RootView;

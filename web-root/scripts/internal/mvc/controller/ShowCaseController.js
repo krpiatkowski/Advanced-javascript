@@ -4,9 +4,7 @@
  * @constructor
  * @implements {Controller}
  */ 
-function ShowcaseController(){
-    
-}
+function ShowcaseController(){}
 
 /**
  * Handle requests from views
@@ -15,9 +13,10 @@ function ShowcaseController(){
  */ 
 ShowcaseController.prototype.receiveEvent = function(event){
     if(event.type === 'Autocompleter.Event.FOCUS'){
+        this.model.focused(event.msg);
         return true;              
     } else if(event.type === 'Autocompleter.Event.SELECT'){
-        this.kittensModel.removeKitten(event.msg);
+        this.model.remove(event.msg);
         return true;
     } else {
         return false;

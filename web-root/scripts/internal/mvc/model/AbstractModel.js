@@ -17,7 +17,7 @@ AbstractModel.prototype.addView = function(view){
     }
     
     this.views.push(view);
-    view.notify(this.getData());
+    view.notify();
 };
 
 /**
@@ -26,7 +26,7 @@ AbstractModel.prototype.addView = function(view){
 AbstractModel.prototype.notifyViews = function(){
     if(this.views !== undefined){
         for(var i = 0; i < this.views.length; i++){
-            this.views[i].notify(this.getData());
+            this.views[i].notify();
         }        
     }
 };
@@ -37,6 +37,4 @@ AbstractModel.prototype.notifyViews = function(){
  * This should be implemented in subclasses.
  * @return {Object} data  
  */ 
-AbstractModel.prototype.getData = function(){
-    return {};
-};
+AbstractModel.prototype.getData = function(){};

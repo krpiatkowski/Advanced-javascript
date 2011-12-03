@@ -1,17 +1,35 @@
+//Models
+var model = new StaticModel();
+
 //Controllers
+var eventLoggingController = new EventLoggingController();
 var showcaseController = new ShowcaseController();
+showcaseController.model = model;
 
 //Views
-var viewRoot = new View('#content');
-var autocompleter = new Autocompleter();
+var rootView = new RootView('#content');
+rootView.controller = eventLoggingController;
 
-viewRoot.addSubview(autocompleter);
-
-//Models
-var kittensModel = new StaticKittensModel();
-
-//Wiring
-showcaseController.kittensModel = kittensModel;
+var autocompleter = new Autocompleter(    
+    function(){
+        return model.list();    
+    },
+    function(item){
+        return item.name;
+    }
+);
 autocompleter.controller = showcaseController;
 
-kittensModel.addView(autocompleter);
+
+var imageView = new ImageView(function(){
+    var focused = model.getFocused();
+    console.log(focused);
+    return focused ? focused.image : '';
+});
+
+rootView.addSubview(autocompleter);
+rootView.addSubview(imageView);
+
+
+model.addView(autocompleter);
+model.addView(imageView);
