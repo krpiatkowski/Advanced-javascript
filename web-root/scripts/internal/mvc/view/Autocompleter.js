@@ -1,6 +1,8 @@
 /**
  * Autocompleter view
+ * 
  * @constructor
+ * @extends {AbstractView}
  */ 
 function Autocompleter(){
     var _this = this;
@@ -8,19 +10,11 @@ function Autocompleter(){
     this.container.autocomplete({
         source:[],
         select: function(event, ui) {
-            _this.dispatchEvent({
-                sender: this,
-                type: Autocompleter.Event.SELECT, 
-                msg:ui.item.object
-            });
+            _this.dispatchEvent(new MVCEvent(this,'Autocompleter.Event.SELECT',ui.item.object));
 			return false;
 		},
         focus: function(event, ui){
-            _this.dispatchEvent({
-                sender: this,
-                type: Autocompleter.Event.FOCUS,
-                msg:ui.item.object
-            });
+            _this.dispatchEvent(new MVCEvent(this,'Autocompleter.Event.FOCUS',ui.item.object));
         }
     });
 }
@@ -37,10 +31,4 @@ Autocompleter.prototype.notify = function(data){
     });
     
     this.container.autocomplete("option", "source", transformedData);
-};
-
-
-Autocompleter.Event = {
-    SELECT : "Autocompleter.Event.SELECT",
-    FOCUS : "Autocompleter.Event.FOCUS"
 };

@@ -1,20 +1,16 @@
 /**
- * A view in the model-view-controller
+ * Abstract view in MVC
  * 
  * @constructor
- */
-function View(id){
-    if(id !== null) {
-        this.container = $(id);        
-    }
-}
+ */ 
+ function AbstractView(){}
 
 /**
  * Insert a view as a subview.
  * 
- * @param {View} subview View in insert
+ * @param {AbstractView} subview View in insert
  */
-View.prototype.addSubview = function(subview){
+AbstractView.prototype.addSubview = function(subview){
     if(this.subviews === undefined){
         this.subviews = [];
     }
@@ -33,9 +29,9 @@ View.prototype.addSubview = function(subview){
  * If no controllers are attached, 
  * the event is bubbled up to the parent view.
  * 
- * @param {Object} event Event to dispatch.
+ * @param {MVCEvent} event Event to dispatch.
  */ 
-View.prototype.dispatchEvent = function(event){
+AbstractView.prototype.dispatchEvent = function(event){
     if(this.controller !== undefined){
         this.controller.receiveEvent(event);
     } else if(this.parent !== undefined) {
@@ -43,6 +39,9 @@ View.prototype.dispatchEvent = function(event){
     }
 };
 
-View.prototype.notify = function(data) {
-    
-}
+/**
+ * Notifies a view, that i should refresh its data.
+ * 
+ * @param {Object} data The data the view should update with.
+ */ 
+AbstractView.prototype.notify = function(data) {}

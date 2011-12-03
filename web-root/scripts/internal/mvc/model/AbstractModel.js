@@ -9,7 +9,7 @@ function AbstractModel(){
 /**
  * Adds a view to the model.
  * 
- * @param {View} view View to be added.
+ * @param {AbstractView} view View to be added.
  */ 
 AbstractModel.prototype.addView = function(view){
     if(this.views === undefined){
