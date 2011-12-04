@@ -2,6 +2,7 @@
  * Abstract view in MVC
  * 
  * @constructor
+ * @property {AbstractView} parent The parent of this view
  */ 
  function AbstractView(){}
 

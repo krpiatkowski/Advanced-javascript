@@ -1,0 +1,12 @@
+!!! 5
+html
+    head
+        title Jasmine
+        script(type='text/javascript', src="scripts/external/jasmine/jasmine.js")
+        script(type='text/javascript', src="scripts/external/jasmine/jasmine-html.js")
+        script(type='text/javascript', src="scripts/internal/extentions/String.spec.js")
+        link(rel='stylesheet', href='scripts/external/jasmine/jasmine.css', media='screen')
+    body
+        script(type='text/javascript')
+            jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+            jasmine.getEnv().execute();
