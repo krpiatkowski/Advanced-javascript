@@ -19,3 +19,4 @@ function test() {
 }
 
 JSLitmus.test('test', test);
+document.getElementById('content').innerHTML = test();
