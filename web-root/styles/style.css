@@ -1,0 +1,16 @@
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 230px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+#content input{
+    float:left;
+}
+
+#content img{
+    float:right;
+}

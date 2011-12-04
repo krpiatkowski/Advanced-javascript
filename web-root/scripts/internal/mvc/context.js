@@ -23,7 +23,6 @@ autocompleter.controller = showcaseController;
 
 var imageView = new ImageView(function(){
     var focused = model.getFocused();
-    console.log(focused);
     return focused ? focused.image : '';
 });
 

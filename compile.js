@@ -37,6 +37,8 @@ compile(code, function(err, result){
         console.log("GZipped            :" + padString(stat.originalGzipSize, 10) + "b");
         console.log("Compressed         :" + padString(stat.compressedSize, 10) + "b");
         console.log("Compressed+GZipped :" + padString(stat.compressedGzipSize, 10) + "b");
+        
+        console.log(result.compiledCode);
     }
 });
 
@@ -60,6 +62,8 @@ function compile(code, next) {
         http = require('http'),
         host = 'closure-compiler.appspot.com',
         body = querystring.stringify({js_code:code.toString('ascii')}) + 
+          '&' + querystring.stringify({'externs_url' : 'http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/jquery-1.7.js' }) + 
+          '&' + querystring.stringify({'js_externs' : '/** @param {...*} var_args */jQuery.prototype.autocomplete = function(var_args) {};'}) + 
           '&compilation_level=ADVANCED_OPTIMIZATIONS' +
           '&output_format=json' +
           '&output_info=compiled_code' +

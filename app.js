@@ -33,6 +33,9 @@ server.get('/mvc.html', function(req, res) {
     res.render('mvc', {scripts: paths.scripts});
 });
 
+server.get('/litmus.html', function(req, res) {
+    res.render('litmus', {scripts: paths.scripts});
+});
 
 
 
