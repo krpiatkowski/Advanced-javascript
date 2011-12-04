@@ -6,7 +6,7 @@ function test() {
     ];
     
     var util = {};
-    util.a = {}
+    util.a = {};
     util.a.b = function(fn,n){
         var first = 1;
         var second = 0;
@@ -17,7 +17,7 @@ function test() {
             sum = second + first;
         }
         return sum;
-    }
+    };
     
     var sum = 0;
     for(var i = 0; i < data.length; i++){
