@@ -1,0 +1,16 @@
+!!! 5
+html
+    head
+        title jQuery
+        
+        script(type='text/javascript', src="scripts/external/jquery/jquery-1.7.1-min.js")
+        script(type='text/javascript', src="scripts/internal/jquery/jquery.validation.js")
+    body
+        #content
+            input(type='text', val='number')
+            input(type='text', val='max({})')
+            input#submit(type='submit')
+        script
+            $("#submit").click(function(){
+                $("input[type=text]").validate();
+            });

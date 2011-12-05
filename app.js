@@ -34,10 +34,16 @@ server.get('/mvc.html', function(req, res) {
 });
 
 server.get('/litmus.html', function(req, res) {
-    res.render('litmus', {scripts: paths.scripts});
+    res.render('litmus');
 });
 
+server.get('/jasmine.html', function(req, res) {
+    res.render('jasmine');
+});
 
+server.get('/jquery.html', function(req, res) {
+    res.render('jquery');
+});
 
 //REST
 var kittens = [

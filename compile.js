@@ -38,7 +38,7 @@ compile(code, function(err, result){
         console.log("Compressed         :" + padString(stat.compressedSize, 10) + "b");
         console.log("Compressed+GZipped :" + padString(stat.compressedGzipSize, 10) + "b");
         
-        console.log(result.compiledCode);
+        //console.log(result.compiledCode);
     }
 });
 
