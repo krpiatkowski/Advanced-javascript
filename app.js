@@ -45,6 +45,10 @@ server.get('/jquery.html', function(req, res) {
     res.render('jquery');
 });
 
+server.get('/jsonp', function(req, res){
+    res.send(req.query.cb + "({response: 'success'});");
+});
+
 //REST
 var kittens = [
     {name: 'Abbymini',   color: 'black',     age: 1, cuteness:2, image:'/images/kitten1.jpg'},
