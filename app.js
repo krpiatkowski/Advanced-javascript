@@ -73,17 +73,19 @@ server.get('/kittens/:kitten', function(req, res){
             return;
         }
     }
-    return null;
+    res.send(null);
 })
 
 server.del('/kittens/:kitten', function(req, res){
     for(var i = 0; i < kittens.length; i++){
         var kitten = kittens[i];
         if(kitten.name === req.params.kitten){
-            delete kittens[i];
+            kittens.splice(i,1);
+            res.send(kittens);
             return;
         }
-    }    
+    }
+    res.send(kittens);
 });
 
 
