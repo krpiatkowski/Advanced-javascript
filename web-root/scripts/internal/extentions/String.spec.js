@@ -4,4 +4,4 @@ describe('String', function(){
             expect(' test '.trim()).toBe('test');
         });
     });
-}); 
+});

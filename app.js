@@ -22,7 +22,6 @@ server.configure('development', function() {
     server.use(server.router);
     server.use(express.static(__dirname + '/web-root'));
     server.use(express.static(__dirname + '/web-root/pages'));
-    server.use(express.static(__dirname + '/exercises'));
 });
 
 server.get('/', function(req, res) {
@@ -43,6 +42,10 @@ server.get('/jasmine.html', function(req, res) {
 
 server.get('/jquery.html', function(req, res) {
     res.render('jquery');
+});
+
+server.get('/require.html', function(req, res) {
+    res.render('require');
 });
 
 server.get('/jsonp', function(req, res){

@@ -1,0 +1,13 @@
+!!! 5
+html
+    head
+        title Require
+        script(type='text/javascript', src="scripts/internal/extentions/Utils.js")
+    body
+        #content
+        script(type='text/javascript')
+            Utils.require("requires.A");
+            Utils.require("requires.A.B");
+            Utils.require("requires.A.B");
+            Utils.require("requires.B");
+            Utils.require("requires.C");

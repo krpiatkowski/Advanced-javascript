@@ -1,11 +1,8 @@
-var scripts = document.getElementsByTagName('script');
-var index = scripts.length - 1;
-console.log(scripts[index])
-
-
 var PACKAGE_DILIMITER = '.';
 
-function package(str){
+var require = {};
+
+require.pack = function(str){
     var strArr = str.split(PACKAGE_DILIMITER);
     var cur = window[strArr[0]];
     
@@ -16,9 +13,19 @@ function package(str){
 
     for(var i = 1; i < strArr.length; i++){
         var next = cur[strArr[i]];
-        cur[strArr[i]] = next ? next : {};
+        cur[strArr[i]] = next || {};
         cur = next;
     }
     
     return cur;
-}
+};
+
+
+
+require.require = function(string, callback){
+
+};
+
+require.define = function(pack, dependecies, scope){
+     
+});
