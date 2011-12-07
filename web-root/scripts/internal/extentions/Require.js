@@ -1,8 +1,21 @@
 var require = {};
-require.PACKAGE_DILIMITER = '.';
+require.PACKAGE_DILIMITER = '/';
 require.defines = {};
 require.graph = {};
 
+require.loader = function(src, callback){
+    var head= document.getElementsByTagName('head')[0];
+    var script= document.createElement('script');
+    script.type= 'text/javascript';
+    script.onreadystatechange= function () {
+    
+    if (this.readyState == 'complete') callback();
+    }
+    
+    script.onload= callback;
+    script.src= src;
+    head.appendChild(script);   
+}
 
 require.packagee = function(str){
     var strArr = str.split(require.PACKAGE_DILIMITER);
@@ -47,17 +60,18 @@ require.check = function(clazz){
         }
         
         if(isReady){
-            p.executed = true;
-            var scope = require.packagee(clazz);
-            p.callback(scope);
+            require.loader(clazz, function(){
+                p.executed = true;
+                var scope = require.packagee(clazz);
+                p.callback(scope);
 
-
-            var dependsOn = require.graph[clazz];            
-            if(dependsOn !== undefined){
-                for(var j = 0; j < dependsOn.length; j++){
-                    require.check(dependsOn[j]);
-                }
-            }
+                var dependsOn = require.graph[clazz];            
+                if(dependsOn !== undefined){
+                    for(var j = 0; j < dependsOn.length; j++){
+                        require.check(dependsOn[j]);
+                    }
+                }    
+            });
         }
     }
 };

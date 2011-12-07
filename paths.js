@@ -4,7 +4,7 @@ module.exports = {
     'scripts/external/jquery/jquery-ui.js',    
     'scripts/internal/extentions/String.js',    
     'scripts/internal/extentions/Require.js',
-    'scripts/internal/extentions/playground.js',
+    'scripts/internal/extentions/require-playground.js',
     'scripts/internal/mvc/utils/MVCEvent.js',
     'scripts/internal/mvc/view/AbstractView.js',
     'scripts/internal/mvc/view/RootView.js',
