@@ -1,2 +1,4 @@
-var content = document.getElementById("content");
-content.innerHTML = content.innerHTML + " C";
+require.define('requires.C', [], function(scope){
+    var content = document.getElementById("content");
+    content.innerHTML = content.innerHTML + " C";
+});

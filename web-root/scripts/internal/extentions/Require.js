@@ -1,9 +1,11 @@
-var PACKAGE_DILIMITER = '.';
-
 var require = {};
+require.PACKAGE_DILIMITER = '.';
+require.defines = {};
+require.graph = {};
 
-require.pack = function(str){
-    var strArr = str.split(PACKAGE_DILIMITER);
+
+require.packagee = function(str){
+    var strArr = str.split(require.PACKAGE_DILIMITER);
     var cur = window[strArr[0]];
     
     if(cur === undefined){
@@ -11,21 +13,51 @@ require.pack = function(str){
         window[strArr[0]] = cur;
     }
 
+    var root = cur;
     for(var i = 1; i < strArr.length; i++){
-        var next = cur[strArr[i]];
-        cur[strArr[i]] = next || {};
+        var nextToken = strArr[i];
+        var next = cur[nextToken] || {};        
+        cur[strArr[i]] = next;
         cur = next;
     }
     
-    return cur;
+    return root;
 };
 
+require.define = function(clazz, dependencies, callback){   
+    require.defines[clazz] = {'callback' : callback, 'dependencies': dependencies, 'executed' : false};
 
-
-require.require = function(string, callback){
-
+    for(var i = 0; i < dependencies.length; i++){
+        var dependecy = dependencies[i];
+        require.graph[dependecy] = require.graph[dependecy] || [];
+        require.graph[dependecy].push(clazz);
+    }
+    require.check(clazz);
 };
 
-require.define = function(pack, dependecies, scope){
-     
-});
+require.check = function(clazz){
+    var p = require.defines[clazz];
+
+    if(!p.executed){
+        var isReady = true;
+        for(var i = 0; i < p.dependencies.length; i++){
+            var dependencyClass = p.dependencies[i];
+            var dependency = require.defines[dependencyClass];
+            isReady = isReady && dependency !== undefined && dependency.executed;
+        }
+        
+        if(isReady){
+            p.executed = true;
+            var scope = require.packagee(clazz);
+            p.callback(scope);
+
+
+            var dependsOn = require.graph[clazz];            
+            if(dependsOn !== undefined){
+                for(var j = 0; j < dependsOn.length; j++){
+                    require.check(dependsOn[j]);
+                }
+            }
+        }
+    }
+};
