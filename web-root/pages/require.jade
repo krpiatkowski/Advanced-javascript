@@ -2,11 +2,12 @@
 html
     head
         title Require
-        script(type='text/javascript', src="scripts/internal/extentions/Require.js")
-        script(type='text/javascript', src="scripts/internal/extentions/require-playground.js")
+        script(type='text/javascript', src="scripts/internal/extentions/Utils.js")
     body
         #content
-        script(type='text/javascript', src="scripts/internal/extentions/requires/A.js")
-        script(type='text/javascript', src="scripts/internal/extentions/requires/A/B.js")
-        script(type='text/javascript', src="scripts/internal/extentions/requires/C.js")
-        
+        script(type='text/javascript')
+            Utils.require("requires.A");
+            Utils.require("requires.A.B");
+            Utils.require("requires.A.B");
+            Utils.require("requires.B");
+            Utils.require("requires.C");

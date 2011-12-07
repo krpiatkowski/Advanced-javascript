@@ -3,20 +3,30 @@ var fs = require('fs');
 var paths = require('./paths.js');
 
 
-var code = "";
+var files = [];
+var fileNames = [];
 for(var i = 0; i < paths.scripts.length; i++){
     var script = paths.scripts[i]; 
     if(script.match("^"+'scripts/internal')){
-        code += fs.readFileSync("./web-root/" + paths.scripts[i]);        
+        files.push(fs.readFileSync("./web-root/" + paths.scripts[i]));
+        fileNames.push("./web-root/" + paths.scripts[i]);
     }
 }
 
-compile(code, function(err, result){
+compile(files, function(err, result){
     if(err){
         console.log(err);
     } else {
         if(result.errors){
-            console.log(result.errors);
+            console.log('Found ' + result.errors.length + ' errors');
+            for(var i = 0; i < result.errors.length; i++){
+                var error = result.errors[i];                
+                console.log(fileNames[parseInt(error.file.substring(6, error.file.length), 10)]);
+                console.log(error.type + ' ' + error.error);
+                console.log(error.line);
+                console.log(padString('^', error.charno+1));
+                console.log('');
+            }
         } else {
             console.log("0 errors");
         }
@@ -24,9 +34,11 @@ compile(code, function(err, result){
             console.log('Found ' + result.warnings.length + ' warnings');
             for(var i = 0; i < result.warnings.length; i++){
                 var warning = result.warnings[i];
+                console.log(fileNames[parseInt(warning.file.substring(6, warning.file.length), 10)]);
                 console.log(warning.type + ' ' + warning.warning);
                 console.log(warning.line);
                 console.log(padString('^', warning.charno+1));
+                console.log('');
             }
         } else {
             console.log("0 warnings");
@@ -56,13 +68,13 @@ function padString(str, amount, right){
     return padding;
 }
 
-function compile(code, next) {
+function compile(files, next) {
   try {
         var querystring = require('querystring'),
         http = require('http'),
         host = 'closure-compiler.appspot.com',
-        body = querystring.stringify({js_code:code.toString('ascii')}) + 
-          '&' + querystring.stringify({'externs_url' : 'http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/jquery-1.7.js' }) + 
+        body =                     
+          querystring.stringify({'externs_url' : 'http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/jquery-1.7.js' }) + 
           '&' + querystring.stringify({'js_externs' : '/** @param {...*} var_args */jQuery.prototype.autocomplete = function(var_args) {};'}) + 
           '&compilation_level=ADVANCED_OPTIMIZATIONS' +
           '&output_format=json' +
@@ -70,9 +82,14 @@ function compile(code, next) {
           '&output_info=warnings'+ 
           '&output_info=errors' + 
           '&output_info=statistics' +
-          '&warning_level=verbose',
-        client = http.createClient(80, host).on('error', next),
-        req = client.request('POST', '/compile', {
+          '&warning_level=verbose';
+        
+        for(var i = 0; i < files.length; i++){
+            body += '&' + querystring.stringify({js_code:files[i].toString('ascii')});
+        }
+        
+        var client = http.createClient(80, host).on('error', next);
+        var req = client.request('POST', '/compile', {
           'Host': host,
           'Content-Length': body.length,
           'Content-Type': 'application/x-www-form-urlencoded'

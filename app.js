@@ -77,7 +77,7 @@ server.get('/kittens/:kitten', function(req, res){
         }
     }
     res.send(null);
-});
+})
 
 server.del('/kittens/:kitten', function(req, res){
     for(var i = 0; i < kittens.length; i++){
@@ -91,6 +91,5 @@ server.del('/kittens/:kitten', function(req, res){
     res.send(kittens);
 });
 
-process.env.PORT = process.env.PORT || 8080;
-console.log('Listning to: ' + process.env.PORT);
+
 server.listen(process.env.PORT);
