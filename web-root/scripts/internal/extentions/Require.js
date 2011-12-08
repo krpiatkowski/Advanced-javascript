@@ -13,17 +13,10 @@ require.resolvePath = function(){
     require.path = paths.splice(0, paths.length-1).join('/');    
 }();
 
-
-require.load = function(src, callback){
+require.load = function(src){
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    
-    script.onreadystatechange= function () {
-        if (this.readyState == 'complete') callback();
-    };
-    
-    script.onload = callback;
     script.src = require.path + '/' + src + ".js";
     head.appendChild(script);   
 };
@@ -48,16 +41,20 @@ require.packagee = function(str){
     return root;
 };
 
-require.define = function(clazz, dependencies, callback){   
-    require.defines[clazz] = {'callback' : callback, 'dependencies': dependencies, 'executed' : false};
+require.require = function(){
+    
+}
+
+require.define = function(namespace, dependencies, callback){   
+    require.defines[namespace] = {'callback' : callback, 'dependencies': dependencies, 'executed' : false};
 
     for(var i = 0; i < dependencies.length; i++){
         var dependecy = dependencies[i];
         require.graph[dependecy] = require.graph[dependecy] || [];
-        require.graph[dependecy].push(clazz);
+        require.graph[dependecy].push(namespace);
     }
         
-    require.check(clazz);
+    require.check(namespace);
 
     for(var i = 0; i < dependencies.length; i++){
         var dependency = dependencies[i];
@@ -69,8 +66,8 @@ require.define = function(clazz, dependencies, callback){
 
 };
 
-require.check = function(clazz){
-    var p = require.defines[clazz];
+require.check = function(namespace){
+    var p = require.defines[namespace];
 
     if(!p.executed){
         var isReady = true;
@@ -82,10 +79,10 @@ require.check = function(clazz){
         
         if(isReady){
             p.executed = true;
-            var scope = require.packagee(clazz);
+            var scope = require.packagee(namespace);
             p.callback(scope);
 
-            var dependsOn = require.graph[clazz];            
+            var dependsOn = require.graph[namespace];            
             if(dependsOn !== undefined){
                 for(var j = 0; j < dependsOn.length; j++){
                     require.check(dependsOn[j]);

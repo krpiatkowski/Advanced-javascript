@@ -46,4 +46,4 @@ AbstractView.prototype.dispatchEvent = function(event){
 /**
  * Notifies a view, that i should refresh its data.
  */ 
-AbstractView.prototype.notify = function() {}
+AbstractView.prototype.notify = function() {};

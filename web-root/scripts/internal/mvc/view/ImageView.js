@@ -11,14 +11,13 @@ function ImageView(onNotify){
     this.image = $('<img>');
     
     this.image.click(function(){
-        console.log(_this);
        _this.dispatchEvent(new MVCEvent(_this, 'ImageView.Event.click', {}));
     });
     
     this.container.append(this.image);
     this.onNotify = onNotify;
 }
-ImageView.prototype = AbstractView;
+ImageView.prototype = new AbstractView();
 ImageView.constructor = ImageView;
 
 ImageView.prototype.notify = function() {
