@@ -1,21 +1,32 @@
 var require = {};
+
+
 require.PACKAGE_DILIMITER = '/';
 require.defines = {};
 require.graph = {};
 
-require.loader = function(src, callback){
-    var head= document.getElementsByTagName('head')[0];
-    var script= document.createElement('script');
-    script.type= 'text/javascript';
+require.resolvePath = function(){
+    var scripts = document.getElementsByTagName('script');
+    var script = scripts[scripts.length - 1]; 
+    var path = script.getAttribute('src');
+    var paths = path.split('/');
+    require.path = paths.splice(0, paths.length-1).join('/');    
+}();
+
+
+require.load = function(src, callback){
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    
     script.onreadystatechange= function () {
+        if (this.readyState == 'complete') callback();
+    };
     
-    if (this.readyState == 'complete') callback();
-    }
-    
-    script.onload= callback;
-    script.src= src;
+    script.onload = callback;
+    script.src = require.path + '/' + src + ".js";
     head.appendChild(script);   
-}
+};
 
 require.packagee = function(str){
     var strArr = str.split(require.PACKAGE_DILIMITER);
@@ -45,7 +56,17 @@ require.define = function(clazz, dependencies, callback){
         require.graph[dependecy] = require.graph[dependecy] || [];
         require.graph[dependecy].push(clazz);
     }
+        
     require.check(clazz);
+
+    for(var i = 0; i < dependencies.length; i++){
+        var dependency = dependencies[i];
+        if(require.defines[dependency] === undefined){
+            require.load(dependency);
+        }
+    }
+
+
 };
 
 require.check = function(clazz){
@@ -60,18 +81,16 @@ require.check = function(clazz){
         }
         
         if(isReady){
-            require.loader(clazz, function(){
-                p.executed = true;
-                var scope = require.packagee(clazz);
-                p.callback(scope);
+            p.executed = true;
+            var scope = require.packagee(clazz);
+            p.callback(scope);
 
-                var dependsOn = require.graph[clazz];            
-                if(dependsOn !== undefined){
-                    for(var j = 0; j < dependsOn.length; j++){
-                        require.check(dependsOn[j]);
-                    }
-                }    
-            });
+            var dependsOn = require.graph[clazz];            
+            if(dependsOn !== undefined){
+                for(var j = 0; j < dependsOn.length; j++){
+                    require.check(dependsOn[j]);
+                }
+            }
         }
     }
 };
